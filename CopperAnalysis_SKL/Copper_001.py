@@ -2,7 +2,6 @@
 """
 Created on Wed Feb 24 11:53:49 2016
 
-@author: Hex
 """
 
 import numpy as np
