@@ -11,7 +11,7 @@ if reimport:
     import theano.tensor as T
     import numpy as np
 
-    reimport=False
+ 
     
 #generate random dataset
 n_randGen=np.random.normal
