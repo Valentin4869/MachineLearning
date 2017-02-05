@@ -2,7 +2,6 @@
 """
 Created on Fri Feb 05 14:59:50 2016
 
-@author: Hex
 """
 import os
 import csv;
