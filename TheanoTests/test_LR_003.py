@@ -21,12 +21,12 @@ f.close()
 #generate random dataset
 n_randGen=np.random.normal
 mu=0.0
-classes=np.asarray([0,1,2,3,4,5,6,7,8,9]) #sigma values
+classes=np.asarray([0,1,2,3,4,5,6,7,8,9]) 
 C=classes.shape[0]
 (samples_N,m)=D.shape
 n_epoch=32
 batch_size=64
-#4000x3 data set of x in R^{3} from 4 classes
+
 
 
 
