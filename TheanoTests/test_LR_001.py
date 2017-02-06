@@ -18,16 +18,20 @@ classes=np.asarray([0.2,14,50,100]) #sigma values
 C=4
 m=3
 samples_N=5000
+samples_C=1000
 n_epoch=20
 
 #4000x3 data set of x in R^{3} from 4 classes
 
-D=np.zeros((C*samples_N,m))
-l=np.zeros((C*samples_N),dtype='int32')
+D=np.zeros((C*samples_C,m))
+l=np.zeros((C*samples_C),dtype='int32')
 
 for i in range(0,C):
-  D[i*samples_N:(i+1)*samples_N,:]=n_randGen(mu,classes[i],(samples_N,m))
-  l[i*samples_N:(i+1)*samples_N]=i;
+  D[i*samples_C:(i+1)*samples_C,:]=n_randGen(mu,classes[i],(samples_C,m))
+  l[i*samples_C:(i+1)*samples_C]=i;
+  
+#Shuffle
+
   
 # W: weights matrix; column i ---> parameters of class_i; R^{3}
 # b: bias column vector   : element i --> free parameter for class_i; R^{1}
