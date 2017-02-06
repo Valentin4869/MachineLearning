@@ -14,7 +14,7 @@ if first_time:
 
 
 f = gzip.open('mnist.pkl.gz', 'rb')
-(D,l), (D_test,l_test), test_set = cPickle.load(f)
+(D,l), (_,_), (D_test,l_test) = cPickle.load(f)
 l=l.astype('int32')
 f.close()
     
@@ -24,7 +24,7 @@ mu=0.0
 classes=np.asarray([0,1,2,3,4,5,6,7,8,9]) #sigma values
 C=classes.shape[0]
 (samples_N,m)=D.shape
-n_epoch=2
+n_epoch=32
 batch_size=64
 #4000x3 data set of x in R^{3} from 4 classes
 
