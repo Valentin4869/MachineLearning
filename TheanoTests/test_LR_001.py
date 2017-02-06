@@ -3,7 +3,7 @@
 Created on Thu Jan 19 13:58:57 2017
 
 """
-first_time=False
+first_time=True
 
 if first_time:
     import theano
@@ -18,7 +18,7 @@ classes=np.asarray([0.2,1.5,3.4,7]) #sigma values
 C=4
 m=3
 samples_N=1000
-n_epoch=64
+n_epoch=4096
 
 #4000x3 data set of x in R^{3} from 4 classes
 
@@ -58,9 +58,9 @@ print('Initial loss: '+str(f_loss(D,l)[0]))
 print('Training for '+ str(n_epoch)+'epochs')
 
 for i in range(0,n_epoch):
-    print('Epoch '+str(i)+'/'+str(n_epoch)+'\nloss: '+str(train(D,l)[0]))
+    print('Epoch '+str(i+1)+'/'+str(n_epoch-1)+'\tloss: '+str(train(D,l)[0]))
 
-
+print('Prediction for a class 3 sample: '+str(f_predict(n_randGen(mu,3,(1,m)))))
 #print('probs for ' + str(D[37:38,:]))  
 #print(f_P_Y(D[37:38,:]))  
 #print(f_predict(D[37:38,:]))  
