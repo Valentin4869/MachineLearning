@@ -14,20 +14,20 @@ if first_time:
 #generate random dataset
 n_randGen=np.random.normal
 mu=0.0
-classes=np.asarray([0.2,1.5,3.4,7]) #sigma values
+classes=np.asarray([0.2,14,50,100]) #sigma values
 C=4
 m=3
-samples_N=1000
-n_epoch=4096
+samples_N=5000
+n_epoch=20
 
 #4000x3 data set of x in R^{3} from 4 classes
 
 D=np.zeros((C*samples_N,m))
 l=np.zeros((C*samples_N),dtype='int32')
 
-for i in range(C):
-  D[i*1000:(i+1)*1000,:]=n_randGen(mu,classes[i],(1000,m))
-  l[i*1000:(i+1)*1000]=i;
+for i in range(0,C):
+  D[i*samples_N:(i+1)*samples_N,:]=n_randGen(mu,classes[i],(samples_N,m))
+  l[i*samples_N:(i+1)*samples_N]=i;
   
 # W: weights matrix; column i ---> parameters of class_i; R^{3}
 # b: bias column vector   : element i --> free parameter for class_i; R^{1}
@@ -46,10 +46,9 @@ g_W, g_b=T.grad(log_loss,[W,b])
 
 f_P_Y=theano.function(inputs=[X],outputs=P_Y)
 f_predict=theano.function(inputs=[X],outputs=predict)
-
-train=theano.function(inputs=[X,y],
+f_train=theano.function(inputs=[X,y],
                       outputs=[log_loss],
-                      updates=[(W, W-alpha*g_W),(b, b-alpha*g_b)]
+                      updates=[(W, W-alpha*g_W),(b, b-alpha*g_b), (alpha,alpha*0.8)]
                       )
 
 #f_loss=theano.function(inputs=[X,y],outputs=[log_loss])                      
@@ -58,7 +57,7 @@ print('Initial loss: '+str(f_loss(D,l)[0]))
 print('Training for '+ str(n_epoch)+'epochs')
 
 for i in range(0,n_epoch):
-    print('Epoch '+str(i+1)+'/'+str(n_epoch-1)+'\tloss: '+str(train(D,l)[0]))
+    print('Epoch '+str(i+1)+'/'+str(n_epoch)+'\tloss: '+str(f_train(D,l)[0]))
 
 print('Prediction for a class 3 sample: '+str(f_predict(n_randGen(mu,3,(1,m)))))
 #print('probs for ' + str(D[37:38,:]))  
