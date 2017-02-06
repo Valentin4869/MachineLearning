@@ -28,12 +28,6 @@ n_epoch=32
 batch_size=64
 
 
-
-
-  
-# W: weights matrix; column i ---> parameters of class_i; R^{3}
-# b: bias column vector   : element i --> free parameter for class_i; R^{1}
-
 W=theano.shared(value=n_randGen(0,1,(m,C)),name='W')
 b=theano.shared(value=n_randGen(0,1,(C)),name='b')
 alpha=theano.shared(value=0.09,name='alpha')
