@@ -3,23 +3,21 @@
 Created on Thu Jan 19 13:58:57 2017
 
 """
+first_time=False
 
-reimport=True
-
-if reimport:
+if first_time:
     import theano
     import theano.tensor as T
     import numpy as np
 
- 
     
 #generate random dataset
 n_randGen=np.random.normal
 mu=0.0
 classes=np.asarray([0.2,1.5,3.4,7]) #sigma values
 C=4
-samples_N=1000
 m=3
+samples_N=1000
 
 #4000x3 data set of x in R^{3} from 4 classes
 
@@ -34,16 +32,19 @@ for i in range(C):
 
 W=theano.shared(value=n_randGen(0,1,(m,C)),name='W')
 b=theano.shared(value=n_randGen(0,1,(C)),name='b')
-
-
 X=T.dmatrix(name='X')
-Y=T.ivector(name='Y')
+y=T.ivector(name='Y')
+alpha=0.08
 
 P_Y=T.nnet.softmax((T.dot(X,W)+b))
 predict=T.argmax(P_Y)
+log_loss=-T.mean(T.log(P_Y)[T.arange(0,y.shape[0]),y])
+g_W, g_b=T.grad(log_loss,[W,b])
 
 f_P_Y=theano.function(inputs=[X],outputs=P_Y)
 f_predict=theano.function(inputs=[X],outputs=predict)
+
+
 
 
 print('probs for ' + str(D[37:38,:]))  
