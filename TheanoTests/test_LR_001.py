@@ -37,7 +37,7 @@ b=theano.shared(value=n_randGen(0,1,(C)),name='b')
 
 
 X=T.dmatrix(name='X')
-Y=T.dmatrix(name='Y')
+Y=T.ivector(name='Y')
 
 P_Y=T.nnet.softmax((T.dot(X,W)+b))
 predict=T.argmax(P_Y)
