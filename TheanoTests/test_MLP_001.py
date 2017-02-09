@@ -64,8 +64,7 @@ for i in range(0,n_epoch):
         
 
 
-rn_class=np.random.randint(0,C)
-print('Prediction for a class '+ str(rn_class) +' sample: '+str(f_predict(n_randGen(mu,classes[rn_class],(1,m)))))
+
 print('Performance on test set: '+str(100.0*sum(f_predict(D_test[0:])==l_test)/l_test.shape[0])+'% accuracy.')
 #print('probs for ' + str(D[37:38,:]))  
 #print(f_P_Y(D[37:38,:]))  
