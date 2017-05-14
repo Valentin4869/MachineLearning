@@ -5,7 +5,7 @@ Using more traditional ML techniques for classifying the number of processing ti
 
 ## MoCap
 Experiments on using RNNs for modeling 3D motion capture data. Part of a Master's thesis. Figure below shows some predicted frames. 
-![test2](preds.jpg)
+![test2](predicted_frames.jpg)
 
 ## TheanoTests
 Learning theano for ML implementations
