@@ -30,12 +30,16 @@ def evin(i,plotit=True):
     print(session.run(y_out,feed_dict={X:X_test[i:i+1],
             keep_prob_c2d:1.0,keep_prob_d1d2:1.0}));
    
-    print('\nClass: ' + getClassStr(np.argmax(session.run(y_out,feed_dict={X:X_test[i:i+1],y: y_test[i:i+1], keep_prob_c2d:1.0,keep_prob_d1d2:1.0}))))
-    print('Actual Class: '+getClassStr(np.argmax(y_test[i:i+1])));
+    print('\nPredicted Class: ' + getClassStr(np.argmax(session.run(y_out,feed_dict={X:X_test[i:i+1],y: y_test[i:i+1], keep_prob_c2d:1.0,keep_prob_d1d2:1.0}))))
+    print('True Class: '+getClassStr(np.argmax(y_test[i:i+1])));
 
     if plotit:
         imshow(X_test[i]);
 
+def ev_mistakes(plotit=True):
+    for i in range(0,test_N):
+        if np.argmax(session.run(y_out,feed_dict={X:X_test[i:i+1],y: y_test[i:i+1], keep_prob_c2d:1.0,keep_prob_d1d2:1.0})) != np.argmax(y_test[i:i+1]):
+            evin(i);
 
 
 def weight_variable(shape):
@@ -140,10 +144,10 @@ h_d2_dpt = tf.nn.dropout(h_d2, keep_prob_d1d2)
 
 
 ##output
-#y_out = tf.matmul(h_fc1_drop, W_fc2) + b_fc2;
+
 W_out = tf.Variable(np.load('weights/acc_977_972/W_out.npy'));
 b_out = tf.Variable(np.load('weights/acc_977_972/b_out.npy'));
-#y_out = tf.nn.relu(tf.matmul(h_d2, W_out) + b_out);
+
 y_out = tf.matmul(h_d2_dpt, W_out) + b_out; # y_softmax handles scaling, so this should be okay
 
 
@@ -169,8 +173,10 @@ for i in range(0,np.shape(y_test)[0]):
 print('------ Mean test accuracy(%i): %g ------' % (i,np.mean(mean_test_acc)));
 
 #manual evaluation; comment out if not needed
-for i in range(0,test_N):
-    evin(i);
+#for i in range(0,test_N):
+#    evin(i);
+
+ev_mistakes()
     
 
 
