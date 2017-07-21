@@ -4,7 +4,6 @@ from utils import *
 
 import tensorflow as tf
 from tensorflow import Session, zeros, float32, reshape
-from tensorflow.examples.tutorials.mnist import input_data
 
 
 
