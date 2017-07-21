@@ -9,3 +9,6 @@ Experiments on using RNNs for modeling 3D motion capture data. Part of a Master'
 
 ## TheanoTests
 Learning theano for ML implementations
+
+## Vehicle Classifier
+Convolutional Neural Network implementation in TensorFlow for classifying vehicles into four categories (![paper](https://arxiv.org/pdf/1602.07125.pdf)).
